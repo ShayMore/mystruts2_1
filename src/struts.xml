@@ -53,6 +53,8 @@
 		
 		<action name="register" class="com.momo.struts.action.RegisterAction">
 			<result name="success">/register_success.jsp</result>
+<!-- 			<result name="registerException">/register.jsp</result> -->
+<!-- 			<exception-mapping result="registerException" exception="com.momo.struts.exceptions.RegisterException"/> -->
 		</action>
 	
 		<!-- 通配符的使用 *是通配符，｛数字｝表示取第几个通配符的数据 
