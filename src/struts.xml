@@ -32,11 +32,13 @@
 			<result name="fail">/WEB-INF/fail.jsp</result>
 			<!-- 异常对象的返回视图处理 -->
 			<result name="nullException">/WEB-INF/nullException.jsp</result>
+			<result name="registerException">/register.jsp</result>
 		</global-results>
 		
 		<!-- 配置全局的异常处理对象 -->
 		<global-exception-mappings>
 			<exception-mapping result="nullException" exception="com.momo.struts.exceptions.MyException"/>
+			<exception-mapping result="registerException" exception="com.momo.struts.exceptions.RegisterException"/>
 		</global-exception-mappings>
 		
 		<!-- 默认action对应的action配置 -->
@@ -47,6 +49,10 @@
 		
 		<action name="page" class="com.momo.struts.action.PageAction">
 			<result name="success">/WEB-INF/${page}.jsp</result>
+		</action>
+		
+		<action name="register" class="com.momo.struts.action.RegisterAction">
+			<result name="success">/register_success.jsp</result>
 		</action>
 	
 		<!-- 通配符的使用 *是通配符，｛数字｝表示取第几个通配符的数据 
