@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+ "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 配置struts框架的常量 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!-- 开启动态方法调用 即 ！的功能   pdf里面没有提此处 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	<!-- 自定义 请求action的后缀名  如add.action此时为add.momo -->
+	<constant name="struts.action.extension" value="momo"></constant>
+	<!-- 允许action 的 name中有斜杠 -->
+<!-- 	<constant name="struts.enable.SlashesInActionNames" value="true"/> -->
+
+	<!-- 配置业务action ：核心 -->
+	<!-- 属性配置有一定的顺序，必须按照以下的顺序进行配置：
+	The content of element type "package" must match 
+	"(result-types?,interceptors?,default-interceptor-ref?,
+	default-action-ref?,default-class-ref?,global-results?,
+	global-exception-mappings?,action*)". -->
+	<!--  namespace="/views" package的命名空间，用于链接访问  views/addBook.action -->
+	<package name="default" extends="struts-default">
+		
+		<!-- 默认action 当找不到对应的action请求时，调用此action并返回 -->
+		<default-action-ref name="NoAction"/>
+
+		<!-- 全局result 
+			 如果其他action中有同名的result时，
+			 struts在响应同名action时使用对应的result，而不是全局result
+		-->
+		<global-results>
+			<result name="fail">/WEB-INF/fail.jsp</result>
+			<!-- 异常对象的返回视图处理 -->
+			<result name="nullException">/WEB-INF/nullException.jsp</result>
+		</global-results>
+		
+		<!-- 配置全局的异常处理对象 -->
+		<global-exception-mappings>
+			<exception-mapping result="nullException" exception="com.momo.struts.exceptions.MyException"/>
+		</global-exception-mappings>
+		
+		<!-- 默认action对应的action配置 -->
+		<action name="NoAction" class="com.momo.struts.action.NoAction">
+			<result name="success">/WEB-INF/login.jsp</result>
+			<result name="fail">/WEB-INF/fail.jsp</result>
+		</action>	
+		
+		<action name="page" class="com.momo.struts.action.PageAction">
+			<result name="success">/WEB-INF/${page}.jsp</result>
+		</action>
+	
+		<!-- 通配符的使用 *是通配符，｛数字｝表示取第几个通配符的数据 
+			通配符的检索规则：从精确检索(即通配符)开始，再按配置顺序检索
+		-->
+		<action name="show_*_*" class="com.momo.struts.action.ShowWords" method="{2}">
+			<result name="success">/WEB-INF/showWords.jsp</result>
+			<result name="input">/WEB-INF/inputWords.jsp</result>
+		</action>
+		<action name="showUser" class="com.momo.struts.action.ShowUser">
+			<result name="success">/WEB-INF/showUser.jsp</result>
+		</action>
+		<action name="addBook" class="com.momo.struts.action.AddBook">
+			<result name="success">/WEB-INF/addBookSuccess.jsp</result>
+		</action>
+		<!-- 指定action类中需要调用的方法名 -->
+<!-- 		<action name="addBook" class="com.momo.struts.action.AddBook" method="add"> -->
+<!-- 			<result name="success">/WEB-INF/addBookSuccess.jsp</result> -->
+<!-- 		</action> -->
+		<action name="aaa" class="com.momo.struts.action.IocAction" method="aaa">
+			<result name="success">/WEB-INF/addBookSuccess.jsp</result>
+		</action>
+		<action name="noIocAction" class="com.momo.struts.action.NoIocAction">
+			<result name="success">/WEB-INF/addBookSuccess.jsp</result>
+		</action>
+<!-- 		<action name="login" class="com.momo.struts.action.LoginAction"> -->
+<!-- 			<result>/success.jsp</result> -->
+<!-- 			<result name="input">/login.jsp</result> -->
+<!-- 		</action> -->
+		<action name="saveUser" class="com.momo.struts.action.SaveUserAction">
+			<result type="redirect">/users.action</result>
+		</action>
+	</package>
+
+</struts> 
