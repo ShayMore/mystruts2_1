@@ -8,7 +8,7 @@
 	<!-- 开启动态方法调用 即 ！的功能   pdf里面没有提此处 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
 	<!-- 自定义 请求action的后缀名  如add.action此时为add.momo -->
-	<constant name="struts.action.extension" value="momo"></constant>
+<!-- 	<constant name="struts.action.extension" value="momo"></constant> -->
 	<!-- 允许action 的 name中有斜杠 -->
 <!-- 	<constant name="struts.enable.SlashesInActionNames" value="true"/> -->
 
@@ -87,6 +87,13 @@
 		<action name="saveUser" class="com.momo.struts.action.SaveUserAction">
 			<result type="redirect">/users.action</result>
 		</action>
+		
+		<!-- 动态结果返回  DynamicResult -->
+		<action name="dynamic" class="com.momo.struts.action.DynamicResultAction">
+			<!-- 以下写法表明可以读取 Value Stack（值栈）里面的东西 -->
+			<result>${t}</result>
+		</action>
+		
 	</package>
 
 </struts> 
