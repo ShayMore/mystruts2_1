@@ -94,6 +94,10 @@
 			<result>${t}</result>
 		</action>
 		
+		<action name="withparams" class="com.momo.struts.action.ResultWithParamsAction">
+			<result>/resultwithparams.jsp</result>
+		</action>
+		
 	</package>
 
 </struts> 
