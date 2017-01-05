@@ -8,6 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-Dynamic2.jsp
+Dynamic2.jsp<br/>
+flag:<s:property value="flag"/>
+<s:if test="%{flag==1}">
+	<div>type=2</div>
+</s:if>
+<s:elseif test="%{flag==2}">
+	<div>type=1</div>
+</s:elseif>
+<s:debug></s:debug>
 </body>
 </html>
